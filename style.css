@@ -1,0 +1,28 @@
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: rgb(194, 140, 4);
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
+#messageEl {
+    font-style: italic;
+}
+
+.Buttons {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.Buttons button {
+    color: #016f32;
+    width: 25vw;
+    background-color: rgb(255, 202, 69);
+    font-weight: bold;
+    border: none;
+    border-radius: 2px;
+    padding: 1vh;
+    margin: 1vh;
+}
