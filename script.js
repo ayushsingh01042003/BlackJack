@@ -3,13 +3,20 @@ let messageEl = document.getElementById("messageEl");
 let sumEl = document.getElementById('sumEl');
 let cardsEl = document.querySelector('#cardsEl');
 let newCardButton = document.querySelector('#NewCard');
+let playerEl = document.getElementById('player-el');
 
 let messageDisplayed = "";
 let sum = 0, firstCard = 0, secondCard = 0;
 let cards = [];
+let isAlive = false, hasBlackJack = false;
+let player = {
+    name: "Ayush",
+    chips: 69
+};
 
-//TODO: add an array of cards to make displaying of cards on screen easier
 function startGame() {
+    playerEl.innerHTML = `${player.name}: $${player.chips}`;
+    isAlive = true;
     renderGame();
 }
 
@@ -24,8 +31,10 @@ let checkBlackJack = () => {
         messageDisplayed = `Do you want to draw a new card?`
     } else if (sum === 21) {
         messageDisplayed =  `BlackJack!`
+        hasBlackJack = true;
     } else {
         messageDisplayed = `You lost`
+        isAlive = false;
     }
 };
 
@@ -49,16 +58,19 @@ let renderGame = () => {
     displayOnScreen();
 };
 
-startButton.addEventListener("click", renderGame);
+startButton.addEventListener("click", startGame);
 
 let drawNewCard = () => {
-    messageEl.innerHTML = `Drawing A new Card from the Deck!`
-    let newCard = Math.floor(Math.random() * 10) + 2;
-    sum += newCard;
-    cards.push(newCard);
-    checkBlackJack();
-    displayOnScreen();
+    if(isAlive === true && hasBlackJack !== true) {
+        messageEl.innerHTML = `Drawing A new Card from the Deck!`
+        let newCard = Math.floor(Math.random() * 13) + 1;
+        sum += newCard;
+        cards.push(newCard);
+        checkBlackJack();
+        displayOnScreen();
+    } else {
+        messageEl.innerText = `You cannot draw a new Card!!\nPress Start to play again`;
+    }
 };
 
 newCardButton.addEventListener("click", drawNewCard);
-
